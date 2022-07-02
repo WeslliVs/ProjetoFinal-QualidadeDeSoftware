@@ -67,6 +67,4 @@ StateProgressBar,com.kofigyan.stateprogressbar,StateProgressBar,drawStateNumberT
 StateProgressBar,com.kofigyan.stateprogressbar,StateProgressBar,drawStateNumberText,Magic Number,The method contains a magic number: 2,1180
 StateProgressBar,com.kofigyan.stateprogressbar,StateProgressBar,drawStateNumberText,Magic Number,The method contains a magic number: 2,1180
 StateProgressBar,com.kofigyan.stateprogressbar,StateProgressBar,selectPaintType,Complex Conditional,The conditional expression (statePosition + 1 == currentState) || (statePosition + 1 < currentState && !checkStateCompleted) is complex.,1210
-StateProgressBar,com.kofigyan.stateprogressbar,StateProgressBar,checkStateCompleted,Complex Conditional,The conditional expression (mEnaAllSttComp && checkStateCompleted) || (statePosition + 1 < currentState && checkStateCompleted) is complex.,1241
-StateProgressBar,com.kofigyan.stateprogressbar,StateProgressBar,checkStateCompleted,Complex Conditional,The conditional expression (mEnaAllSttComp && checkStateCompleted) || (statePosition + 1 > currentState + 1 && checkStateCompleted) is complex.,1241
 StateProgressBar,com.kofigyan.stateprogressbar.utils,FontManager,getTypeface,Long Statement,The length of the statement "Log.w("StateProgressBar"`"Cannot create asset from " + filePath + ". Ensure you have passed in the correct path and file name."`e);" is 131.,34

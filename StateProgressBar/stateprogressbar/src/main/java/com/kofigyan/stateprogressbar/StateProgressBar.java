@@ -1237,15 +1237,30 @@ public class StateProgressBar extends View {
         }
     }
 
+    private boolean auxCheckStateCompleted(int currentState, int statePosition, boolean checkStateCompleted){
+        if (mEnaAllSttComp && checkStateCompleted){
+            return true;
+        } else return false;
+    }
+
 
     private boolean checkStateCompleted(int currentState, int statePosition, boolean checkStateCompleted) {
+
         if (!mIsSttNumDesc) {
-            if ((mEnaAllSttComp && checkStateCompleted) || (statePosition + 1 < currentState && checkStateCompleted)) {
+            if (auxCheckStateCompleted){
                 return true;
+            } else {
+                if (statePosition + 1 < currentState && checkStateCompleted){
+                    return true;
+                }
             }
         } else {
-            if ((mEnaAllSttComp && checkStateCompleted) || (statePosition + 1 > currentState + 1 && checkStateCompleted)) {
+            if (auxCheckStateCompleted) {
                 return true;
+            } else {
+                if (statePosition + 1 > currentState + 1 && checkStateCompleted){
+                    return true;
+                }
             }
         }
         return false;
