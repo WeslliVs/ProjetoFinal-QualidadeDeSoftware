@@ -52,38 +52,38 @@ public class StateProgressBar extends View {
     private static final String STATE_NUMBER_TEXT_SIZE_KEY = "mStateNumberTextSize";
     private static final String STATE_DESCRIPTION_SIZE_KEY = "mStateDescriptionSize";
 
-    private static final String MAX_STATE_NUMBER_KEY = "mMaxStateNumber";
+    private static final String MAX_STATE_NUMBER_KEY = "mMaxSttNum";
     private static final String CURRENT_STATE_NUMBER_KEY = "mCurrentStateNumber";
 
     private static final String ANIM_START_DELAY_KEY = "mAnimStartDelay";
     private static final String ANIM_DURATION_KEY = "mAnimDuration";
 
-    private static final String DESC_TOP_SPC_DECR_KEY = "mDescTopSpaceDecrementer";
-    private static final String DESC_TOP_SPC_INC_KEY = "mDescTopSpaceIncrementer";
+    private static final String DESC_TOP_SPC_DECR_KEY = "mDescTopSpcDecr";
+    private static final String DESC_TOP_SPC_INC_KEY = "mDescTopSpcIncr";
 
     private static final String BACKGROUND_COLOR_KEY = "mBackgroundColor";
     private static final String FOREGROUND_COLOR_KEY = "mForegroundColor";
-    private static final String STT_NUM_BACK_COL_KEY = "mStateNumberBackgroundColor";
-    private static final String STT_NUM_FORE_COLOR_KEY = "mStateNumberForegroundColor";
+    private static final String STT_NUM_BACK_COL_KEY = "mSttNumBkGrndClr";
+    private static final String STT_NUM_FORE_COLOR_KEY = "mSttNumFrGrndClr";
 
-    private static final String CURRENT_STATE_DESC_COLOR_KEY = "mCurrentStateDescriptionColor";
+    private static final String CURRENT_STATE_DESC_COLOR_KEY = "mCrrntSttDescClr";
     private static final String STATE_DESC_COLOR_KEY = "mStateDescriptionColor";
 
     private static final String CHECK_STATE_COMPLETED_KEY = "mCheckStateCompleted";
 
-    private static final String ENA_ALL_STT_COMP_KEY = "mEnableAllStatesCompleted";
+    private static final String ENA_ALL_STT_COMP_KEY = "mEnaAllSttComp";
 
-    private static final String JUSTIFY_MULTILINE_DESC_KEY = "mJustifyMultilineDescription";
+    private static final String JUSTIFY_MULTILINE_DESC_KEY = "mJustMultDesc";
 
-    private static final String DESCRIPTION_LINE_SPACING_KEY = "mDescriptionLinesSpacing";
+    private static final String DESCRIPTION_LINE_SPACING_KEY = "mDescLinesSpc";
 
     private static final String END_CENTER_X_KEY = "mEndCenterX";
     private static final String START_CENTER_X_KEY = "mStartCenterX";
     private static final String ANIM_START_X_POS_KEY = "mAnimStartXPos";
     private static final String ANIM_END_X_POS_KEY = "mAnimEndXPos";
     private static final String IS_CURRENT_ANIM_STARTED_KEY = "mIsCurrentAnimStarted";
-    private static final String ANM_CUR_PRO_STT_KEY = "Mani_to_cur_prog_stt";
-    private static final String IS_STT_NUM_DESC_KEY = "mIsStateNumberDescending";
+    private static final String ANM_CUR_PRO_STT_KEY = "mAniToCurrProgStt";
+    private static final String IS_STT_NUM_DESC_KEY = "mIsSttNumDesc";
     private static final String INSTANCE_STATE = "saved_instance";
 
     private ArrayList<String> mStateDescriptionData = new ArrayList<String>();
@@ -116,7 +116,7 @@ public class StateProgressBar extends View {
      */
     private float mEndCenterX;
 
-    private int mMaxStateNumber;
+    private int mMaxSttNum;
     private int mCurrentStateNumber;
 
     private int mAnimStartDelay;
@@ -124,8 +124,8 @@ public class StateProgressBar extends View {
 
     private float mSpacing;
 
-    private float mDescTopSpaceDecrementer;
-    private float mDescTopSpaceIncrementer;
+    private float mDescTopSpcDecr;
+    private float mDescTopSpcIncr;
 
     private static final float DEFAULT_TEXT_SIZE = 15f;
     private static final float DEFAULT_STATE_SIZE = 25f;
@@ -133,19 +133,19 @@ public class StateProgressBar extends View {
     /**
      * Paints for drawing
      */
-    private Paint mStateNumberForegroundPaint;
+    private Paint mSttNumForgrndPnt;
     private Paint mStateCheckedForegroundPaint;
-    private Paint mStateNumberBackgroundPaint;
+    private Paint mSttNumBackgrndPnt;
     private Paint mBackgroundPaint;
     private Paint mForegroundPaint;
-    private Paint mCurrentStateDescriptionPaint;
-    private Paint mStateDescriptionPaint;
+    private Paint mCurSttDescPaint;
+    private Paint mSttDescPaint;
 
     private int mBackgroundColor;
     private int mForegroundColor;
-    private int mStateNumberBackgroundColor;
-    private int mStateNumberForegroundColor;
-    private int mCurrentStateDescriptionColor;
+    private int mSttNumBkGrndClr;
+    private int mSttNumFrGrndClr;
+    private int mCrrntSttDescClr;
     private int mStateDescriptionColor;
 
     /**
@@ -164,7 +164,7 @@ public class StateProgressBar extends View {
     /**
      * 5 4 3 2 1  (RTL Support)
      */
-    private boolean mIsStateNumberDescending;
+    private boolean mIsSttNumDesc;
 
 
     private int mStateItemClickedNumber;
@@ -179,15 +179,15 @@ public class StateProgressBar extends View {
 
     private boolean mIsDescriptionMultiline;
     private int mMaxDescriptionLine;
-    private float mDescriptionLinesSpacing;
+    private float mDescLinesSpc;
 
     private static final String STT_DESC_LINE_SEP = "\n";
 
-    private boolean mJustifyMultilineDescription;
+    private boolean mJustMultDesc;
 
 
-    private boolean Mani_to_cur_prog_stt;
-    private boolean mEnableAllStatesCompleted;
+    private boolean mAniToCurrProgStt;
+    private boolean mEnaAllSttComp;
     private boolean mCheckStateCompleted;
 
     private Typeface mCheckFont;
@@ -207,7 +207,7 @@ public class StateProgressBar extends View {
         super(context, attrs, defStyle);
         init(context, attrs, defStyle);
         initializePainters();
-        updateCheckAllStatesValues(mEnableAllStatesCompleted);
+        updateCheckAllStatesValues(mEnaAllSttComp);
 
     }
 
@@ -232,13 +232,13 @@ public class StateProgressBar extends View {
 
             mBackgroundColor = a.getColor(R.styleable.StateProgressBar_spb_stateBackgroundColor, mBackgroundColor);
             mForegroundColor = a.getColor(R.styleable.StateProgressBar_spb_stateForegroundColor, mForegroundColor);
-            mStateNumberBackgroundColor = a.getColor(R.styleable.StateProgressBar_spb_stateNumberBackgroundColor, mStateNumberBackgroundColor);
-            mStateNumberForegroundColor = a.getColor(R.styleable.StateProgressBar_spb_stateNumberForegroundColor, mStateNumberForegroundColor);
-            mCurrentStateDescriptionColor = a.getColor(R.styleable.StateProgressBar_spb_currentStateDescriptionColor, mCurrentStateDescriptionColor);
+            mSttNumBkGrndClr = a.getColor(R.styleable.StateProgressBar_spb_stateNumberBackgroundColor, mSttNumBkGrndClr);
+            mSttNumFrGrndClr = a.getColor(R.styleable.StateProgressBar_spb_stateNumberForegroundColor, mSttNumFrGrndClr);
+            mCrrntSttDescClr = a.getColor(R.styleable.StateProgressBar_spb_currentStateDescriptionColor, mCrrntSttDescClr);
             mStateDescriptionColor = a.getColor(R.styleable.StateProgressBar_spb_stateDescriptionColor, mStateDescriptionColor);
 
             mCurrentStateNumber = a.getInteger(R.styleable.StateProgressBar_spb_currentStateNumber, mCurrentStateNumber);
-            mMaxStateNumber = a.getInteger(R.styleable.StateProgressBar_spb_maxStateNumber, mMaxStateNumber);
+            mMaxSttNum = a.getInteger(R.styleable.StateProgressBar_spb_maxStateNumber, mMaxSttNum);
 
             mStateSize = a.getDimension(R.styleable.StateProgressBar_spb_stateSize, mStateSize);
             mStateNumberTextSize = a.getDimension(R.styleable.StateProgressBar_spb_stateTextSize, mStateNumberTextSize);
@@ -246,25 +246,25 @@ public class StateProgressBar extends View {
             mStateLineThickness = a.getDimension(R.styleable.StateProgressBar_spb_stateLineThickness, mStateLineThickness);
 
             mCheckStateCompleted = a.getBoolean(R.styleable.StateProgressBar_spb_checkStateCompleted, mCheckStateCompleted);
-            Mani_to_cur_prog_stt = a.getBoolean(R.styleable.StateProgressBar_spb_animateToCurrentProgressState, Mani_to_cur_prog_stt);
-            mEnableAllStatesCompleted = a.getBoolean(R.styleable.StateProgressBar_spb_enableAllStatesCompleted, mEnableAllStatesCompleted);
+            mAniToCurrProgStt = a.getBoolean(R.styleable.StateProgressBar_spb_animateToCurrentProgressState, mAniToCurrProgStt);
+            mEnaAllSttComp = a.getBoolean(R.styleable.StateProgressBar_spb_enableAllStatesCompleted, mEnaAllSttComp);
 
-            mDescTopSpaceDecrementer = a.getDimension(R.styleable.StateProgressBar_spb_descriptionTopSpaceDecrementer, mDescTopSpaceDecrementer);
-            mDescTopSpaceIncrementer = a.getDimension(R.styleable.StateProgressBar_spb_descriptionTopSpaceIncrementer, mDescTopSpaceIncrementer);
+            mDescTopSpcDecr = a.getDimension(R.styleable.StateProgressBar_spb_descriptionTopSpaceDecrementer, mDescTopSpcDecr);
+            mDescTopSpcIncr = a.getDimension(R.styleable.StateProgressBar_spb_descriptionTopSpaceIncrementer, mDescTopSpcIncr);
 
             mAnimDuration = a.getInteger(R.styleable.StateProgressBar_spb_animationDuration, mAnimDuration);
             mAnimStartDelay = a.getInteger(R.styleable.StateProgressBar_spb_animationStartDelay, mAnimStartDelay);
 
-            mIsStateNumberDescending = a.getBoolean(R.styleable.StateProgressBar_spb_stateNumberIsDescending, mIsStateNumberDescending);
+            mIsSttNumDesc = a.getBoolean(R.styleable.StateProgressBar_spb_stateNumberIsDescending, mIsSttNumDesc);
 
             mMaxDescriptionLine = a.getInteger(R.styleable.StateProgressBar_spb_maxDescriptionLines, mMaxDescriptionLine);
 
-            mDescriptionLinesSpacing = a.getDimension(R.styleable.StateProgressBar_spb_descriptionLinesSpacing, mDescriptionLinesSpacing);
+            mDescLinesSpc = a.getDimension(R.styleable.StateProgressBar_spb_descriptionLinesSpacing, mDescLinesSpc);
 
-            mJustifyMultilineDescription = a.getBoolean(R.styleable.StateProgressBar_spb_justifyMultilineDescription, mJustifyMultilineDescription);
+            mJustMultDesc = a.getBoolean(R.styleable.StateProgressBar_spb_justifyMultilineDescription, mJustMultDesc);
 
 
-            if (!Mani_to_cur_prog_stt) {
+            if (!mAniToCurrProgStt) {
                 stopAnimation();
             }
 
@@ -287,21 +287,21 @@ public class StateProgressBar extends View {
         mBackgroundPaint = setPaintAttributes(mStateLineThickness, mBackgroundColor);
         mForegroundPaint = setPaintAttributes(mStateLineThickness, mForegroundColor);
 
-        mStateNumberForegroundPaint = setPaintAttributes(mStateNumberTextSize, mStateNumberForegroundColor, mCustomStateNumberTypeface != null ? mCustomStateNumberTypeface : mDefaultTypefaceBold);
-        mStateCheckedForegroundPaint = setPaintAttributes(mStateNumberTextSize, mStateNumberForegroundColor, mCheckFont);
+        mSttNumForgrndPnt = setPaintAttributes(mStateNumberTextSize, mSttNumFrGrndClr, mCustomStateNumberTypeface != null ? mCustomStateNumberTypeface : mDefaultTypefaceBold);
+        mStateCheckedForegroundPaint = setPaintAttributes(mStateNumberTextSize, mSttNumFrGrndClr, mCheckFont);
 
-        mStateNumberBackgroundPaint = setPaintAttributes(mStateNumberTextSize, mStateNumberBackgroundColor, mCustomStateNumberTypeface != null ? mCustomStateNumberTypeface : mDefaultTypefaceBold);
-        mCurrentStateDescriptionPaint = setPaintAttributes(mStateDescriptionSize, mCurrentStateDescriptionColor, mCustomSttDescTyfc != null ? mCustomSttDescTyfc : mDefaultTypefaceBold);
+        mSttNumBackgrndPnt = setPaintAttributes(mStateNumberTextSize, mSttNumBkGrndClr, mCustomStateNumberTypeface != null ? mCustomStateNumberTypeface : mDefaultTypefaceBold);
+        mCurSttDescPaint = setPaintAttributes(mStateDescriptionSize, mCrrntSttDescClr, mCustomSttDescTyfc != null ? mCustomSttDescTyfc : mDefaultTypefaceBold);
 
-        mStateDescriptionPaint = setPaintAttributes(mStateDescriptionSize, mStateDescriptionColor, mCustomSttDescTyfc != null ? mCustomSttDescTyfc : mDefaultTypefaceBold);
+        mSttDescPaint = setPaintAttributes(mStateDescriptionSize, mStateDescriptionColor, mCustomSttDescTyfc != null ? mCustomSttDescTyfc : mDefaultTypefaceBold);
 
     }
 
 
     public void setStateNumberTypeface(String pathToFont) {
         mCustomStateNumberTypeface = FontManager.getTypeface(getContext(), pathToFont);
-        mStateNumberForegroundPaint.setTypeface(mCustomStateNumberTypeface != null ? mCustomStateNumberTypeface : mDefaultTypefaceBold);
-        mStateNumberBackgroundPaint.setTypeface(mCustomStateNumberTypeface != null ? mCustomStateNumberTypeface : mDefaultTypefaceBold);
+        mSttNumForgrndPnt.setTypeface(mCustomStateNumberTypeface != null ? mCustomStateNumberTypeface : mDefaultTypefaceBold);
+        mSttNumBackgrndPnt.setTypeface(mCustomStateNumberTypeface != null ? mCustomStateNumberTypeface : mDefaultTypefaceBold);
 
         invalidate();
     }
@@ -314,8 +314,8 @@ public class StateProgressBar extends View {
 
     public void setStateDescriptionTypeface(String pathToFont) {
         mCustomSttDescTyfc = FontManager.getTypeface(getContext(), pathToFont);
-        mStateDescriptionPaint.setTypeface(mCustomSttDescTyfc != null ? mCustomSttDescTyfc : mDefaultTypefaceBold);
-        mCurrentStateDescriptionPaint.setTypeface(mCustomSttDescTyfc != null ? mCustomSttDescTyfc : mDefaultTypefaceBold);
+        mSttDescPaint.setTypeface(mCustomSttDescTyfc != null ? mCustomSttDescTyfc : mDefaultTypefaceBold);
+        mCurSttDescPaint.setTypeface(mCustomSttDescTyfc != null ? mCustomSttDescTyfc : mDefaultTypefaceBold);
 
         invalidate();
     }
@@ -378,29 +378,29 @@ public class StateProgressBar extends View {
     }
 
     public void setStateNumberBackgroundColor(int stateNumberBackgroundColor) {
-        mStateNumberBackgroundColor = stateNumberBackgroundColor;
-        mStateNumberBackgroundPaint.setColor(mStateNumberBackgroundColor);
+        mSttNumBkGrndClr = stateNumberBackgroundColor;
+        mSttNumBackgrndPnt.setColor(mSttNumBkGrndClr);
         invalidate();
     }
 
     public int getStateNumberBackgroundColor() {
-        return mStateNumberBackgroundColor;
+        return mSttNumBkGrndClr;
     }
 
     public void setStateNumberForegroundColor(int stateNumberForegroundColor) {
-        mStateNumberForegroundColor = stateNumberForegroundColor;
-        mStateNumberForegroundPaint.setColor(mStateNumberForegroundColor);
-        mStateCheckedForegroundPaint.setColor(mStateNumberForegroundColor);
+        mSttNumFrGrndClr = stateNumberForegroundColor;
+        mSttNumForgrndPnt.setColor(mSttNumFrGrndClr);
+        mStateCheckedForegroundPaint.setColor(mSttNumFrGrndClr);
         invalidate();
     }
 
     public int getStateNumberForegroundColor() {
-        return mStateNumberForegroundColor;
+        return mSttNumFrGrndClr;
     }
 
     public void setStateDescriptionColor(int stateDescriptionColor) {
         mStateDescriptionColor = stateDescriptionColor;
-        mStateDescriptionPaint.setColor(mStateDescriptionColor);
+        mSttDescPaint.setColor(mStateDescriptionColor);
         invalidate();
     }
 
@@ -409,19 +409,19 @@ public class StateProgressBar extends View {
     }
 
     public void setCurrentStateDescriptionColor(int currentStateDescriptionColor) {
-        mCurrentStateDescriptionColor = currentStateDescriptionColor;
-        mCurrentStateDescriptionPaint.setColor(mCurrentStateDescriptionColor);
+        mCrrntSttDescClr = currentStateDescriptionColor;
+        mCurSttDescPaint.setColor(mCrrntSttDescClr);
         invalidate();
     }
 
     public int getCurrentStateDescriptionColor() {
-        return mCurrentStateDescriptionColor;
+        return mCrrntSttDescClr;
     }
 
     public void setCurrentStateNumber(StateNumber currentStateNumber) {
         validateStateNumber(currentStateNumber.getValue());
         mCurrentStateNumber = currentStateNumber.getValue();
-        updateCheckAllStatesValues(mEnableAllStatesCompleted);
+        updateCheckAllStatesValues(mEnaAllSttComp);
         invalidate();
     }
 
@@ -431,18 +431,18 @@ public class StateProgressBar extends View {
 
 
     public void setMaxStateNumber(StateNumber maximumState) {
-        mMaxStateNumber = maximumState.getValue();
+        mMaxSttNum = maximumState.getValue();
         resolveMaxStateNumber();
     }
 
     private void resolveMaxStateNumber() {
         validateStateNumber(mCurrentStateNumber);
-        updateCheckAllStatesValues(mEnableAllStatesCompleted);
+        updateCheckAllStatesValues(mEnaAllSttComp);
         invalidate();
     }
 
     public int getMaxStateNumber() {
-        return mMaxStateNumber;
+        return mMaxSttNum;
     }
 
 
@@ -470,8 +470,8 @@ public class StateProgressBar extends View {
 
         resolveStateSize();
 
-        mStateNumberForegroundPaint.setTextSize(mStateNumberTextSize);
-        mStateNumberBackgroundPaint.setTextSize(mStateNumberTextSize);
+        mSttNumForgrndPnt.setTextSize(mStateNumberTextSize);
+        mSttNumBackgrndPnt.setTextSize(mStateNumberTextSize);
         mStateCheckedForegroundPaint.setTextSize(mStateNumberTextSize);
 
         mStateRadius = mStateSize / 2;
@@ -489,8 +489,8 @@ public class StateProgressBar extends View {
     }
 
     private void resolveStateDescriptionSize() {
-        mCurrentStateDescriptionPaint.setTextSize(mStateDescriptionSize);
-        mStateDescriptionPaint.setTextSize(mStateDescriptionSize);
+        mCurSttDescPaint.setTextSize(mStateDescriptionSize);
+        mSttDescPaint.setTextSize(mStateDescriptionSize);
         requestLayout();
     }
 
@@ -510,26 +510,26 @@ public class StateProgressBar extends View {
 
 
     public void setAllStatesCompleted(boolean enableAllStatesCompleted) {
-        mEnableAllStatesCompleted = enableAllStatesCompleted;
-        updateCheckAllStatesValues(mEnableAllStatesCompleted);
+        mEnaAllSttComp = enableAllStatesCompleted;
+        updateCheckAllStatesValues(mEnaAllSttComp);
         invalidate();
     }
 
     private void updateCheckAllStatesValues(boolean enableAllStatesCompleted) {
         if (enableAllStatesCompleted) {
             mCheckStateCompleted = true;
-            mCurrentStateNumber = mMaxStateNumber;
-            mStateDescriptionPaint.setColor(mCurrentStateDescriptionPaint.getColor());
+            mCurrentStateNumber = mMaxSttNum;
+            mSttDescPaint.setColor(mCurSttDescPaint.getColor());
         } else {
-            mStateDescriptionPaint.setColor(mStateDescriptionPaint.getColor());
+            mSttDescPaint.setColor(mSttDescPaint.getColor());
         }
     }
 
 
     public void enableAnimationToCurrentState(boolean animateToCurrentProgressState) {
-        this.Mani_to_cur_prog_stt = animateToCurrentProgressState;
+        this.mAniToCurrProgStt = animateToCurrentProgressState;
 
-        if (Mani_to_cur_prog_stt && mAnimator == null) {
+        if (mAniToCurrProgStt && mAnimator == null) {
             startAnimator();
         }
 
@@ -539,37 +539,37 @@ public class StateProgressBar extends View {
 
 
     private void validateStateNumber(int stateNumber) {
-        if (stateNumber > mMaxStateNumber) {
-            throw new IllegalStateException("State number (" + stateNumber + ") cannot be greater than total number of states " + mMaxStateNumber);
+        if (stateNumber > mMaxSttNum) {
+            throw new IllegSttExce("State number (" + stateNumber + ") cannot be greater than total number of states " + mMaxSttNum);
         }
     }
 
 
     public void setDescriptionTopSpaceIncrementer(float spaceIncrementer) {
-        mDescTopSpaceIncrementer = spaceIncrementer;
+        mDescTopSpcIncr = spaceIncrementer;
         requestLayout();
     }
 
 
     public void setDescriptionTopSpaceDecrementer(float spaceDecrementer) {
-        mDescTopSpaceDecrementer = spaceDecrementer;
+        mDescTopSpcDecr = spaceDecrementer;
         requestLayout();
     }
 
     public float getDescriptionTopSpaceDecrementer() {
-        return mDescTopSpaceDecrementer;
+        return mDescTopSpcDecr;
     }
 
     public float getDescriptionTopSpaceIncrementer() {
-        return mDescTopSpaceIncrementer;
+        return mDescTopSpcIncr;
     }
 
     public float getDescriptionLinesSpacing() {
-        return mDescriptionLinesSpacing;
+        return mDescLinesSpc;
     }
 
     public void setDescriptionLinesSpacing(float descriptionLinesSpacing) {
-        mDescriptionLinesSpacing = descriptionLinesSpacing;
+        mDescLinesSpc = descriptionLinesSpacing;
         requestLayout();
     }
 
@@ -594,12 +594,12 @@ public class StateProgressBar extends View {
 
 
     public void setStateNumberIsDescending(boolean stateNumberIsDescending) {
-        mIsStateNumberDescending = stateNumberIsDescending;
+        mIsSttNumDesc = stateNumberIsDescending;
         invalidate();
     }
 
     public boolean getStateNumberIsDescending() {
-        return mIsStateNumberDescending;
+        return mIsSttNumDesc;
     }
 
 
@@ -625,11 +625,11 @@ public class StateProgressBar extends View {
 
 
     public boolean isJustifyMultilineDescription() {
-        return mJustifyMultilineDescription;
+        return mJustMultDesc;
     }
 
     public void setJustifyMultilineDescription(boolean justifyMultilineDescription) {
-        mJustifyMultilineDescription = justifyMultilineDescription;
+        mJustMultDesc = justifyMultilineDescription;
         invalidate();
     }
 
@@ -659,9 +659,9 @@ public class StateProgressBar extends View {
 
         mBackgroundColor = ContextCompat.getColor(context, R.color.background_color);
         mForegroundColor = ContextCompat.getColor(context, R.color.foreground_color);
-        mStateNumberBackgroundColor = ContextCompat.getColor(context, R.color.background_text_color);
-        mStateNumberForegroundColor = ContextCompat.getColor(context, R.color.foreground_text_color);
-        mCurrentStateDescriptionColor = ContextCompat.getColor(context, R.color.foreground_color);
+        mSttNumBkGrndClr = ContextCompat.getColor(context, R.color.background_text_color);
+        mSttNumFrGrndClr = ContextCompat.getColor(context, R.color.foreground_text_color);
+        mCrrntSttDescClr = ContextCompat.getColor(context, R.color.foreground_color);
         mStateDescriptionColor = ContextCompat.getColor(context, R.color.background_text_color);
 
         mStateSize = 0.0f;
@@ -669,26 +669,26 @@ public class StateProgressBar extends View {
         mStateNumberTextSize = 0.0f;
         mStateDescriptionSize = 15f;
 
-        mMaxStateNumber = StateNumber.FIVE.getValue();
+        mMaxSttNum = StateNumber.FIVE.getValue();
         mCurrentStateNumber = StateNumber.ONE.getValue();
 
         mSpacing = 4.0f;
 
-        mDescTopSpaceDecrementer = 0.0f;
-        mDescTopSpaceIncrementer = 0.0f;
+        mDescTopSpcDecr = 0.0f;
+        mDescTopSpcIncr = 0.0f;
 
-        mDescriptionLinesSpacing = 0.0f;
+        mDescLinesSpc = 0.0f;
 
         mCheckStateCompleted = false;
-        Mani_to_cur_prog_stt = false;
-        mEnableAllStatesCompleted = false;
+        mAniToCurrProgStt = false;
+        mEnaAllSttComp = false;
 
         mAnimStartDelay = 100;
         mAnimDuration = 4000;
 
-        mIsStateNumberDescending = false;
+        mIsSttNumDesc = false;
 
-        mJustifyMultilineDescription = false;
+        mJustMultDesc = false;
     }
 
 
@@ -760,10 +760,10 @@ public class StateProgressBar extends View {
 
     private boolean isPointInCircle(int clickX, int clickY) {
         boolean isTouched = false;
-        for (int i = 0; i < mMaxStateNumber; i++) {
+        for (int i = 0; i < mMaxSttNum; i++) {
             isTouched = (!(clickX < mCellWidth * (i + 1) - (mCellWidth / 2) - mStateRadius || clickX > mCellWidth * (i + 1) - (mCellWidth / 2) + mStateRadius || clickY < mCellHeight / 2 - mStateRadius || clickY > mCellHeight / 2 + mStateRadius));
             if (isTouched) {
-                mStateItemClickedNumber = mIsStateNumberDescending ? mMaxStateNumber - i : i + 1;
+                mStateItemClickedNumber = mIsSttNumDesc ? mMaxSttNum - i : i + 1;
                 return isTouched;
             }
 
@@ -787,10 +787,10 @@ public class StateProgressBar extends View {
         }
 
 
-        final int stateNumberColor = isForegroundColor ? mStateNumberForegroundColor : mStateNumberBackgroundColor;
+        final int stateNumberColor = isForegroundColor ? mSttNumFrGrndClr : mSttNumBkGrndClr;
         final float stateNumberSize = getStateNumberTextSize();
 
-        final int stateDescriptionColor = isCurrentState ? mCurrentStateDescriptionColor : mStateDescriptionColor;
+        final int stateDescriptionColor = isCurrentState ? mCrrntSttDescClr : mStateDescriptionColor;
 
 
         StateItemNumber stateItemNumber = StateItemNumber.builder().
@@ -806,7 +806,7 @@ public class StateProgressBar extends View {
             stateItemDescription = StateItemDescription.builder().
                     color(stateDescriptionColor).
                     size(stateDescriptionSize).
-                    text(getStateDescriptionData().get(mIsStateNumberDescending ? (getStateDescriptionData().size() >= mMaxStateNumber ? stateItemClickedNumber - 1 + (getStateDescriptionData().size() - mMaxStateNumber) : stateItemClickedNumber - 1) : stateItemClickedNumber - 1)).
+                    text(getStateDescriptionData().get(mIsSttNumDesc ? (getStateDescriptionData().size() >= mMaxSttNum ? stateItemClickedNumber - 1 + (getStateDescriptionData().size() - mMaxSttNum) : stateItemClickedNumber - 1) : stateItemClickedNumber - 1)).
                     build();
         }
 
@@ -825,7 +825,7 @@ public class StateProgressBar extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        mCellWidth = getWidth() / mMaxStateNumber;
+        mCellWidth = getWidth() / mMaxSttNum;
         mNextCellWidth = mCellWidth;
     }
 
@@ -855,10 +855,10 @@ public class StateProgressBar extends View {
             return (int) (2 * mStateRadius) + (int) (mSpacing);
         } else {
             if (checkForDescriptionMultiLine(mStateDescriptionData)) {
-                return (int) (2 * mStateRadius) + (int) (selectMaxDescriptionLine(mMaxDescriptionLine) * (1.3 * mStateDescriptionSize)) + (int) (mSpacing) - (int) (mDescTopSpaceDecrementer) + (int) (mDescTopSpaceIncrementer) + (int) mDescriptionLinesSpacing;
+                return (int) (2 * mStateRadius) + (int) (selectMaxDescriptionLine(mMaxDescriptionLine) * (1.3 * mStateDescriptionSize)) + (int) (mSpacing) - (int) (mDescTopSpcDecr) + (int) (mDescTopSpcIncr) + (int) mDescLinesSpc;
 
             } else {
-                return (int) (2 * mStateRadius) + (int) (1.3 * mStateDescriptionSize) + (int) (mSpacing) - (int) (mDescTopSpaceDecrementer) + (int) (mDescTopSpaceIncrementer);
+                return (int) (2 * mStateRadius) + (int) (1.3 * mStateDescriptionSize) + (int) (mSpacing) - (int) (mDescTopSpcDecr) + (int) (mDescTopSpcIncr);
             }
         }
     }
@@ -913,7 +913,7 @@ public class StateProgressBar extends View {
 
         drawForegroundLines(canvas);
 
-        drawStateNumberText(canvas, mMaxStateNumber);
+        drawStateNumberText(canvas, mMaxSttNum);
 
         drawStateDescriptionText(canvas);
 
@@ -921,31 +921,31 @@ public class StateProgressBar extends View {
 
     private void drawBackgroundCircles(Canvas canvas) {
 
-        int startIndex = mIsStateNumberDescending ? 0 : mCurrentStateNumber;
-        int endIndex = mIsStateNumberDescending ? mMaxStateNumber - mCurrentStateNumber : mMaxStateNumber;
+        int startIndex = mIsSttNumDesc ? 0 : mCurrentStateNumber;
+        int endIndex = mIsSttNumDesc ? mMaxSttNum - mCurrentStateNumber : mMaxSttNum;
 
         drawCircles(canvas, mBackgroundPaint, startIndex, endIndex);
     }
 
     private void drawForegroundCircles(Canvas canvas) {
 
-        int startIndex = mIsStateNumberDescending ? mMaxStateNumber - mCurrentStateNumber : 0;
-        int endIndex = mIsStateNumberDescending ? mMaxStateNumber : mCurrentStateNumber;
+        int startIndex = mIsSttNumDesc ? mMaxSttNum - mCurrentStateNumber : 0;
+        int endIndex = mIsSttNumDesc ? mMaxSttNum : mCurrentStateNumber;
 
         drawCircles(canvas, mForegroundPaint, startIndex, endIndex);
     }
 
 
     private void drawBackgroundLines(Canvas canvas) {
-        int startIndex = mIsStateNumberDescending ? 0 : mCurrentStateNumber - 1;
-        int endIndex = mIsStateNumberDescending ? mMaxStateNumber - mCurrentStateNumber + 1 : mMaxStateNumber;
+        int startIndex = mIsSttNumDesc ? 0 : mCurrentStateNumber - 1;
+        int endIndex = mIsSttNumDesc ? mMaxSttNum - mCurrentStateNumber + 1 : mMaxSttNum;
 
         drawLines(canvas, mBackgroundPaint, startIndex, endIndex);
     }
 
     private void drawForegroundLines(Canvas canvas) {
-        int startIndex = mIsStateNumberDescending ? mMaxStateNumber - mCurrentStateNumber + 1 : 0;
-        int endIndex = mIsStateNumberDescending ? mMaxStateNumber : mCurrentStateNumber - 1;
+        int startIndex = mIsSttNumDesc ? mMaxSttNum - mCurrentStateNumber + 1 : 0;
+        int endIndex = mIsSttNumDesc ? mMaxSttNum : mCurrentStateNumber - 1;
 
         drawLines(canvas, mForegroundPaint, startIndex, endIndex);
     }
@@ -978,7 +978,7 @@ public class StateProgressBar extends View {
 
     private void setAnimatorStartEndCenterX() {
         if (mCurrentStateNumber > MIN_STATE_NUMBER && mCurrentStateNumber < MAX_STATE_NUMBER + 1) {
-            final int count = mIsStateNumberDescending ? mMaxStateNumber - mCurrentStateNumber + 1 : mCurrentStateNumber - 1;
+            final int count = mIsSttNumDesc ? mMaxSttNum - mCurrentStateNumber + 1 : mCurrentStateNumber - 1;
             for (int i = 0; i < count; i++) {
 
                 if (i == 0) {
@@ -997,7 +997,7 @@ public class StateProgressBar extends View {
 
 
     private void drawCurrentStateJoiningLine(Canvas canvas) {
-        if (Mani_to_cur_prog_stt && mCurrentStateNumber > 1) {
+        if (mAniToCurrProgStt && mCurrentStateNumber > 1) {
             animateToCurrentState(canvas);
         } else {
             drawLineToCurrentState(canvas);
@@ -1027,7 +1027,7 @@ public class StateProgressBar extends View {
             enableAnimationToCurrentState(false);
             invalidate();
         } else if (mAnimEndXPos <= mEndCenterX) {
-            if (!mIsStateNumberDescending) {
+            if (!mIsSttNumDesc) {
                 canvas.drawLine(mStartCenterX, mCellHeight / 2, mAnimEndXPos, mCellHeight / 2, mForegroundPaint);
                 canvas.drawLine(mAnimEndXPos, mCellHeight / 2, mEndCenterX, mCellHeight / 2, mBackgroundPaint);
             } else {
@@ -1038,7 +1038,7 @@ public class StateProgressBar extends View {
             mAnimStartXPos = mAnimEndXPos;
 
         } else {
-            if (!mIsStateNumberDescending)
+            if (!mIsSttNumDesc)
                 canvas.drawLine(mStartCenterX, mCellHeight / 2, mEndCenterX, mCellHeight / 2, mForegroundPaint);
             else
                 canvas.drawLine(mEndCenterX, mCellHeight / 2, mStartCenterX, mCellHeight / 2, mForegroundPaint);
@@ -1059,13 +1059,13 @@ public class StateProgressBar extends View {
         if (!mStateDescriptionData.isEmpty()) {
 
             for (int i = 0; i < mStateDescriptionData.size(); i++) {
-                if (i < mMaxStateNumber) {
+                if (i < mMaxSttNum) {
                     innerPaintType = selectDescriptionPaint(mCurrentStateNumber, i);
                     xPos = (int) (mNextCellWidth - (mCellWidth / 2));
 
 
                     if (mIsDescriptionMultiline && mMaxDescriptionLine > 1) {
-                        String stateDescription = mIsStateNumberDescending ? mStateDescriptionData.get(mStateDescriptionData.size() - 1 - i) : mStateDescriptionData.get(i);
+                        String stateDescription = mIsSttNumDesc ? mStateDescriptionData.get(mStateDescriptionData.size() - 1 - i) : mStateDescriptionData.get(i);
                         int nextLineCounter = 0;
                         int newXPos = 0;
                         String[] stateDescriptionLines = stateDescription.split(STT_DESC_LINE_SEP);
@@ -1073,20 +1073,20 @@ public class StateProgressBar extends View {
                         for (String line : stateDescriptionLines) {
                             nextLineCounter = nextLineCounter + 1;
 
-                            if (mJustifyMultilineDescription && nextLineCounter > 1) {
+                            if (mJustMultDesc && nextLineCounter > 1) {
                                 newXPos = getNewXPosForDescriptionMultilineJustification(stateDescriptionLines[0], line, innerPaintType, xPos);
                             }
 
                             if (nextLineCounter <= mMaxDescriptionLine) {
-                                yPos = (int) (mCellHeight + (nextLineCounter * mStateDescriptionSize) - mSpacing - mDescTopSpaceDecrementer + mDescTopSpaceIncrementer + (nextLineCounter > 1 ? (mDescriptionLinesSpacing * (nextLineCounter - 1)) : 0));//mSpacing = mStateNumberForegroundPaint.getTextSize()
+                                yPos = (int) (mCellHeight + (nextLineCounter * mStateDescriptionSize) - mSpacing - mDescTopSpcDecr + mDescTopSpcIncr + (nextLineCounter > 1 ? (mDescLinesSpc * (nextLineCounter - 1)) : 0));//mSpacing = mSttNumForgrndPnt.getTextSize()
                                 canvas.drawText(line, newXPos == 0 ? xPos : newXPos, yPos, innerPaintType);
                             }
 
                         }
 
                     } else {
-                        yPos = (int) (mCellHeight + mStateDescriptionSize - mSpacing - mDescTopSpaceDecrementer + mDescTopSpaceIncrementer);//mSpacing = mStateNumberForegroundPaint.getTextSize()
-                        canvas.drawText(mIsStateNumberDescending ? mStateDescriptionData.get(mStateDescriptionData.size() - 1 - i) : mStateDescriptionData.get(i), xPos, yPos, innerPaintType);
+                        yPos = (int) (mCellHeight + mStateDescriptionSize - mSpacing - mDescTopSpcDecr + mDescTopSpcIncr);//mSpacing = mSttNumForgrndPnt.getTextSize()
+                        canvas.drawText(mIsSttNumDesc ? mStateDescriptionData.get(mStateDescriptionData.size() - 1 - i) : mStateDescriptionData.get(i), xPos, yPos, innerPaintType);
                     }
 
                     mNextCellWidth += mCellWidth;
@@ -1129,12 +1129,12 @@ public class StateProgressBar extends View {
 
     private Paint selectDescriptionPaint(int currentState, int statePosition) {
 
-        currentState = mIsStateNumberDescending ? mMaxStateNumber + 1 - currentState : currentState;
+        currentState = mIsSttNumDesc ? mMaxSttNum + 1 - currentState : currentState;
 
         if (statePosition + 1 == currentState) {
-            return mCurrentStateDescriptionPaint;
+            return mCurSttDescPaint;
         } else {
-            return mStateDescriptionPaint;
+            return mSttDescPaint;
         }
     }
 
@@ -1142,8 +1142,8 @@ public class StateProgressBar extends View {
     private void resolveStateDescriptionDataSize(ArrayList<String> stateDescriptionData) {
 
         final int stateDescriptionDataSize = stateDescriptionData.size();
-        if (stateDescriptionDataSize < mMaxStateNumber) {
-            for (int i = 0; i < mMaxStateNumber - stateDescriptionDataSize; i++) {
+        if (stateDescriptionDataSize < mMaxSttNum) {
+            for (int i = 0; i < mMaxSttNum - stateDescriptionDataSize; i++) {
                 stateDescriptionData.add(stateDescriptionDataSize + i, EMPTY_SPACE_DESCRIPTOR);
             }
         }
@@ -1197,7 +1197,7 @@ public class StateProgressBar extends View {
             if (mCheckStateCompleted && isChecked) {
                 canvas.drawText(getContext().getString(R.string.check_icon), xPos, yPos, innerPaintType);
             } else {
-                if (mIsStateNumberDescending)
+                if (mIsSttNumDesc)
                     canvas.drawText(String.valueOf(noOfCircles - i), xPos, yPos, innerPaintType);
                 else
                     canvas.drawText(String.valueOf(i + 1), xPos, yPos, innerPaintType);
@@ -1209,9 +1209,9 @@ public class StateProgressBar extends View {
 
     private Paint selectPaintType(int currentState, int statePosition, boolean checkStateCompleted) {
 
-        currentState = mIsStateNumberDescending ? mMaxStateNumber - currentState : currentState;
-        Paint foregroundPaint = mIsStateNumberDescending ? mStateNumberBackgroundPaint : mStateNumberForegroundPaint;
-        Paint backgroundPaint = mIsStateNumberDescending ? mStateNumberForegroundPaint : mStateNumberBackgroundPaint;
+        currentState = mIsSttNumDesc ? mMaxSttNum - currentState : currentState;
+        Paint foregroundPaint = mIsSttNumDesc ? mSttNumBackgrndPnt : mSttNumForgrndPnt;
+        Paint backgroundPaint = mIsSttNumDesc ? mSttNumForgrndPnt : mSttNumBackgrndPnt;
 
         if (checkStateCompleted) {
             return applyCheckStateCompletedPaintType(currentState, statePosition, checkStateCompleted);
@@ -1230,21 +1230,21 @@ public class StateProgressBar extends View {
     private Paint applyCheckStateCompletedPaintType(int currentState, int statePosition, boolean checkStateCompleted) {
         if (checkStateCompleted(currentState, statePosition, checkStateCompleted)) {
             return mStateCheckedForegroundPaint;
-        } else if (statePosition + 1 == (mIsStateNumberDescending ? currentState + 1 : currentState)) {
-            return mStateNumberForegroundPaint;
+        } else if (statePosition + 1 == (mIsSttNumDesc ? currentState + 1 : currentState)) {
+            return mSttNumForgrndPnt;
         } else {
-            return mStateNumberBackgroundPaint;
+            return mSttNumBackgrndPnt;
         }
     }
 
 
     private boolean checkStateCompleted(int currentState, int statePosition, boolean checkStateCompleted) {
-        if (!mIsStateNumberDescending) {
-            if ((mEnableAllStatesCompleted && checkStateCompleted) || (statePosition + 1 < currentState && checkStateCompleted)) {
+        if (!mIsSttNumDesc) {
+            if ((mEnaAllSttComp && checkStateCompleted) || (statePosition + 1 < currentState && checkStateCompleted)) {
                 return true;
             }
         } else {
-            if ((mEnableAllStatesCompleted && checkStateCompleted) || (statePosition + 1 > currentState + 1 && checkStateCompleted)) {
+            if ((mEnaAllSttComp && checkStateCompleted) || (statePosition + 1 > currentState + 1 && checkStateCompleted)) {
                 return true;
             }
         }
@@ -1254,12 +1254,12 @@ public class StateProgressBar extends View {
 
     private boolean isCheckIconUsed(int currentState, int statePosition) {
 
-        currentState = mIsStateNumberDescending ? mMaxStateNumber + 1 - currentState : currentState;
+        currentState = mIsSttNumDesc ? mMaxSttNum + 1 - currentState : currentState;
 
-        if (!mIsStateNumberDescending)
-            return mEnableAllStatesCompleted || statePosition + 1 < currentState;
+        if (!mIsSttNumDesc)
+            return mEnaAllSttComp || statePosition + 1 < currentState;
         else
-            return mEnableAllStatesCompleted || statePosition + 1 > currentState;
+            return mEnaAllSttComp || statePosition + 1 > currentState;
     }
 
 
@@ -1368,38 +1368,38 @@ public class StateProgressBar extends View {
         bundle.putFloat(ANIM_END_X_POS_KEY, this.mAnimEndXPos);
 
         bundle.putBoolean(IS_CURRENT_ANIM_STARTED_KEY, this.mIsCurrentAnimStarted);
-        bundle.putBoolean(ANM_CUR_PRO_STT_KEY, this.Mani_to_cur_prog_stt);
+        bundle.putBoolean(ANM_CUR_PRO_STT_KEY, this.mAniToCurrProgStt);
 
-        bundle.putBoolean(IS_STT_NUM_DESC_KEY, this.mIsStateNumberDescending);
+        bundle.putBoolean(IS_STT_NUM_DESC_KEY, this.mIsSttNumDesc);
 
         bundle.putFloat(STATE_SIZE_KEY, this.mStateSize);
         bundle.putFloat(STATE_LINE_THICKNESS_KEY, this.mStateLineThickness);
         bundle.putFloat(STATE_NUMBER_TEXT_SIZE_KEY, this.mStateNumberTextSize);
         bundle.putFloat(STATE_DESCRIPTION_SIZE_KEY, this.mStateDescriptionSize);
 
-        bundle.putInt(MAX_STATE_NUMBER_KEY, this.mMaxStateNumber);
+        bundle.putInt(MAX_STATE_NUMBER_KEY, this.mMaxSttNum);
         bundle.putInt(CURRENT_STATE_NUMBER_KEY, this.mCurrentStateNumber);
         bundle.putInt(ANIM_START_DELAY_KEY, this.mAnimStartDelay);
         bundle.putInt(ANIM_DURATION_KEY, this.mAnimDuration);
 
-        bundle.putFloat(DESC_TOP_SPC_DECR_KEY, this.mDescTopSpaceDecrementer);
-        bundle.putFloat(DESC_TOP_SPC_INC_KEY, this.mDescTopSpaceIncrementer);
+        bundle.putFloat(DESC_TOP_SPC_DECR_KEY, this.mDescTopSpcDecr);
+        bundle.putFloat(DESC_TOP_SPC_INC_KEY, this.mDescTopSpcIncr);
 
-        bundle.putFloat(DESCRIPTION_LINE_SPACING_KEY, this.mDescriptionLinesSpacing);
+        bundle.putFloat(DESCRIPTION_LINE_SPACING_KEY, this.mDescLinesSpc);
 
         bundle.putInt(BACKGROUND_COLOR_KEY, this.mBackgroundColor);
         bundle.putInt(FOREGROUND_COLOR_KEY, this.mForegroundColor);
-        bundle.putInt(STT_NUM_BACK_COL_KEY, this.mStateNumberBackgroundColor);
-        bundle.putInt(STT_NUM_FORE_COLOR_KEY, this.mStateNumberForegroundColor);
+        bundle.putInt(STT_NUM_BACK_COL_KEY, this.mSttNumBkGrndClr);
+        bundle.putInt(STT_NUM_FORE_COLOR_KEY, this.mSttNumFrGrndClr);
 
-        bundle.putInt(CURRENT_STATE_DESC_COLOR_KEY, this.mCurrentStateDescriptionColor);
+        bundle.putInt(CURRENT_STATE_DESC_COLOR_KEY, this.mCrrntSttDescClr);
         bundle.putInt(STATE_DESC_COLOR_KEY, this.mStateDescriptionColor);
 
         bundle.putBoolean(CHECK_STATE_COMPLETED_KEY, this.mCheckStateCompleted);
 
-        bundle.putBoolean(ENA_ALL_STT_COMP_KEY, this.mEnableAllStatesCompleted);
+        bundle.putBoolean(ENA_ALL_STT_COMP_KEY, this.mEnaAllSttComp);
 
-        bundle.putBoolean(JUSTIFY_MULTILINE_DESC_KEY, this.mJustifyMultilineDescription);
+        bundle.putBoolean(JUSTIFY_MULTILINE_DESC_KEY, this.mJustMultDesc);
 
 
         return bundle;
@@ -1420,9 +1420,9 @@ public class StateProgressBar extends View {
 
             mIsCurrentAnimStarted = bundle.getBoolean(IS_CURRENT_ANIM_STARTED_KEY);
 
-            Mani_to_cur_prog_stt = bundle.getBoolean(ANM_CUR_PRO_STT_KEY);
+            mAniToCurrProgStt = bundle.getBoolean(ANM_CUR_PRO_STT_KEY);
 
-            mIsStateNumberDescending = bundle.getBoolean(IS_STT_NUM_DESC_KEY);
+            mIsSttNumDesc = bundle.getBoolean(IS_STT_NUM_DESC_KEY);
 
 
             mStateNumberTextSize = bundle.getFloat(STATE_NUMBER_TEXT_SIZE_KEY);
@@ -1436,7 +1436,7 @@ public class StateProgressBar extends View {
             resolveStateDescriptionSize();
 
 
-            mMaxStateNumber = bundle.getInt(MAX_STATE_NUMBER_KEY);
+            mMaxSttNum = bundle.getInt(MAX_STATE_NUMBER_KEY);
             mCurrentStateNumber = bundle.getInt(CURRENT_STATE_NUMBER_KEY);
             resolveMaxStateNumber();
 
@@ -1445,27 +1445,27 @@ public class StateProgressBar extends View {
             mAnimDuration = bundle.getInt(ANIM_DURATION_KEY);
 
 
-            mDescTopSpaceDecrementer = bundle.getFloat(DESC_TOP_SPC_DECR_KEY);
+            mDescTopSpcDecr = bundle.getFloat(DESC_TOP_SPC_DECR_KEY);
 
-            mDescTopSpaceIncrementer = bundle.getFloat(DESC_TOP_SPC_INC_KEY);
+            mDescTopSpcIncr = bundle.getFloat(DESC_TOP_SPC_INC_KEY);
 
-            mDescriptionLinesSpacing = bundle.getFloat(DESCRIPTION_LINE_SPACING_KEY);
+            mDescLinesSpc = bundle.getFloat(DESCRIPTION_LINE_SPACING_KEY);
 
-            setDescriptionTopSpaceIncrementer(mDescTopSpaceIncrementer); // call requestLayout
+            setDescriptionTopSpaceIncrementer(mDescTopSpcIncr); // call requestLayout
 
             mBackgroundColor = bundle.getInt(BACKGROUND_COLOR_KEY);
 
             mForegroundColor = bundle.getInt(FOREGROUND_COLOR_KEY);
 
-            mStateNumberBackgroundColor = bundle.getInt(STT_NUM_BACK_COL_KEY);
+            mSttNumBkGrndClr = bundle.getInt(STT_NUM_BACK_COL_KEY);
 
-            mStateNumberForegroundColor = bundle.getInt(STT_NUM_FORE_COLOR_KEY);
+            mSttNumFrGrndClr = bundle.getInt(STT_NUM_FORE_COLOR_KEY);
 
-            mCurrentStateDescriptionColor = bundle.getInt(CURRENT_STATE_DESC_COLOR_KEY);
+            mCrrntSttDescClr = bundle.getInt(CURRENT_STATE_DESC_COLOR_KEY);
 
             mStateDescriptionColor = bundle.getInt(STATE_DESC_COLOR_KEY);
 
-            mJustifyMultilineDescription = bundle.getBoolean(JUSTIFY_MULTILINE_DESC_KEY);
+            mJustMultDesc = bundle.getBoolean(JUSTIFY_MULTILINE_DESC_KEY);
 
             initializePainters();
 
