@@ -30,6 +30,7 @@ public class AnimationFourStatesActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        enum delay = 5000;
 
         super.onOptionsItemSelected(item);
 
@@ -43,23 +44,19 @@ public class AnimationFourStatesActivity extends BaseActivity {
 
             case R.id.anim_start_delay:
 
-                stateProgressBar.setAnimationStartDelay(5000);
+                stateProgressBar.setAnimationStartDelay(delay);
 
                 break;
 
             case R.id.anim_duration:
 
-                stateProgressBar.setAnimationDuration(5000);
+                stateProgressBar.setAnimationDuration(delay);
 
                 break;
-
 
         }
 
         return true;
     }
 
-
-
 }
-

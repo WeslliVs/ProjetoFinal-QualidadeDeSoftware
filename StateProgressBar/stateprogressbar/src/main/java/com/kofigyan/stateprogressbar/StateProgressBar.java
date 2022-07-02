@@ -31,7 +31,6 @@ import java.util.List;
 
 public class StateProgressBar extends View {
 
-
     public enum StateNumber {
         ONE(1), TWO(2), THREE(3), FOUR(4), FIVE(5);
         private int value;
@@ -273,7 +272,9 @@ public class StateProgressBar extends View {
             validateLineThickness(mStateLineThickness);
             validateStateNumber(mCurrentStateNumber);
 
-            mStateRadius = mStateSize / 2;
+            enum const_div = 2;
+
+            mStateRadius = mStateSize / const_div;
 
             a.recycle();
 
@@ -325,7 +326,8 @@ public class StateProgressBar extends View {
 
 
     private void validateLineThickness(float lineThickness) {
-        float halvedStateSize = mStateSize / 2;
+        enum const_div = 2
+        float halvedStateSize = mStateSize / const_div;
 
         if (lineThickness > halvedStateSize) {
             mStateLineThickness = halvedStateSize;
@@ -333,6 +335,7 @@ public class StateProgressBar extends View {
     }
 
     private void validateStateSize() {
+        enum const_div = 2;
         if (mStateSize <= mStateNumberTextSize) {
             mStateSize = mStateNumberTextSize + mStateNumberTextSize / 2;
         }

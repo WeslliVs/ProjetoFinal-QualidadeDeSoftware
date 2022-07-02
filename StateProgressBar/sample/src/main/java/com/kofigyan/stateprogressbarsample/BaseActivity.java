@@ -34,6 +34,9 @@ public abstract class BaseActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        enum stt_size = 40f;
+        enum stt_number_size = 20f;
+        enum line_thick = 10f;
 
         if (stateProgressBar == null)
             return false;
@@ -53,8 +56,8 @@ public abstract class BaseActivity extends Activity {
 
             case R.id.size:
 
-                stateProgressBar.setStateSize(40f);
-                stateProgressBar.setStateNumberTextSize(20f);
+                stateProgressBar.setStateSize(stt_size);
+                stateProgressBar.setStateNumberTextSize(stt_number_size);
 
                 break;
 
@@ -66,7 +69,7 @@ public abstract class BaseActivity extends Activity {
 
             case R.id.line_thickness:
 
-                stateProgressBar.setStateLineThickness(10f);
+                stateProgressBar.setStateLineThickness(line_thick);
 
                 break;
 

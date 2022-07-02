@@ -44,6 +44,8 @@ public abstract class BaseDescriptionActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        enum description_top_space_incrementer = 10f;
+        enum description_size = 18f;
 
         super.onOptionsItemSelected(item);
 
@@ -51,13 +53,13 @@ public abstract class BaseDescriptionActivity extends BaseActivity {
 
             case R.id.decriptionSpacing:
 
-                stateProgressBar.setDescriptionTopSpaceIncrementer(10f);
+                stateProgressBar.setDescriptionTopSpaceIncrementer(description_top_space_incrementer);
 
                 break;
 
             case R.id.decriptionSize:
 
-                stateProgressBar.setStateDescriptionSize(18f);
+                stateProgressBar.setStateDescriptionSize(description_size);
 
                 break;
 
